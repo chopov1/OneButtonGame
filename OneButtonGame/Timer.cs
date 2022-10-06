@@ -19,7 +19,7 @@ namespace OneButtonGame
 
         public Timer(Game game, int bpm, StringSprite output) : base(game)
         {
-            beatsPerMin = 60000/bpm;
+            beatsPerMin = bpm/60;
             currentTime = 0;
             this.output = output;
             Game.Components.Add(this);
@@ -28,11 +28,8 @@ namespace OneButtonGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+           //if beatsPerMin = 60, I would think this should increase at a consistent rate and stay synced with the audio. 
             currentTime += beatsPerMin * gameTime.ElapsedGameTime.Milliseconds;
-            if (currentTime == maxTime)
-            {
-                onComplete();
-            }
             output.StringToDraw = "first Timer: " + currentTime;
 
         }
